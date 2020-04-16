@@ -1,0 +1,25 @@
+---
+title: "COVID-19"
+date: "4/11/2020"
+output: ioslides_presentation
+---
+## COVID-19 Spread
+
+COVID 19 data 4//9/2020 from JHU data.
+
+
+## Interactive Chart
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="COVID 19 data 4//9/2020 from JHU data"}
+library(plotly)
+dat <- read.csv("04-09-2020.csv")
+gg <- ggplot(data = dat)
+
+ggplotly(
+       gg +
+           geom_bar(aes(x = Country_Region, y = Confirmed) , stat = "identity", position = position_identity()) + 
+           theme(axis.text.x = element_text(angle = 90, hjust = 1))
+    
+    )
+```
+
