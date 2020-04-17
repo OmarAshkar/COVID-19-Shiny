@@ -8,15 +8,14 @@
 #
 library(shiny)
 
-shinyUI(navbarPage(
-    shiny::titlePanel("COVID-19"),
+shinyUI(navbarPage("COVID-19",
     sidebarLayout(
         sidebarPanel(
             selectizeInput(inputId = "countries", 
                            "Countries To Look For", 
                            selected = "Global",
                            multiple = T,
-                           choices = sort(dat$Country.Region)),
+                           choices = c("Global", sort(dat$Country.Region))),
             dateRangeInput('dateRange',
                            label = 'Date range input: yyyy-mm-dd',
                            start = min(dat$Last.Update), end = max(dat$Last.Update)
