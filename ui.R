@@ -1,13 +1,5 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-library(shiny)
-
+source('data.R', local = F)
+library(plotly)
 shinyUI(navbarPage("COVID-19",
     sidebarLayout(
         sidebarPanel(
@@ -15,7 +7,7 @@ shinyUI(navbarPage("COVID-19",
                            "Countries To Look For", 
                            selected = "Global",
                            multiple = T,
-                           choices = c("Global", sort(dat$Country.Region))),
+                           choices = c("Global", sort(unique(dat$Country.Region)))),
             dateRangeInput('dateRange',
                            label = 'Date range input: yyyy-mm-dd',
                            start = min(dat$Last.Update), end = max(dat$Last.Update)
