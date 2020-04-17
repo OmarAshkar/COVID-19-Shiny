@@ -16,22 +16,34 @@ shinyUI(navbarPage(
                            "Countries To Look For", 
                            selected = "Global",
                            multiple = T,
-                           choices = datall$Country.Region),
-            sliderInput(inputId = "dates", 
-                        label = "Time Range", 
-                        min = min(datall$Last.Update), 
-                        max = max(datall$Last.Update), 
-                        value = c(min(datall$Last.Update), max(datall$Last.Update)))
+                           choices = sort(dat$Country.Region)),
+            dateRangeInput('dateRange',
+                           label = 'Date range input: yyyy-mm-dd',
+                           start = min(dat$Last.Update), end = max(dat$Last.Update)
+            )
             
         ),
         mainPanel(
             tabsetPanel(
                 tabsetPanel(
-                    tabPanel("Overall Counts", plotOutput("plot")), 
-                    tabPanel("Time Trends", verbatimTextOutput("summary"))
+                    tabPanel("Overall Counts", 
+                             plotlyOutput("confirmeda"),
+                             plotlyOutput("deathsa"),
+                             plotlyOutput("recovereda"),
+                             plotlyOutput("activea"),
+                             DT::DTOutput("taba")
+                             ), 
+                    tabPanel("Time Trends", 
+                             plotlyOutput("confirmedt"),
+                             plotlyOutput("deathst"),
+                             plotlyOutput("recovetredt"),
+                             plotlyOutput("activet"),
+                             DT::DTOutput("tabt")
+                             )
                 )
         )
     )
     )
     
 ))
+
