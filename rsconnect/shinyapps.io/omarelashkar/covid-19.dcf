@@ -5,9 +5,9 @@ account: omarelashkar
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2135530
-bundleId: 3027466
+bundleId: 3027523
 url: https://omarelashkar.shinyapps.io/covid-19/
-when: 1587136958.94641
+when: 1587137830.10153
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: index.Rmd

@@ -3,6 +3,8 @@ library(plotly)
 shinyUI(navbarPage("COVID-19",
     sidebarLayout(
         sidebarPanel(
+            h3("Select all the countries you want and set the time range you want to search for"),
+            h4("Delete `Global` if you want to see singular countries."),
             selectizeInput(inputId = "countries", 
                            "Countries To Look For", 
                            selected = "Global",
@@ -17,6 +19,7 @@ shinyUI(navbarPage("COVID-19",
         mainPanel(
             tabsetPanel(
                 tabsetPanel(
+                    h4("Select `Overall counts` if you want total count for the countries you have selected in the defined time period you have entered"),
                     tabPanel("Overall Counts", 
                              plotlyOutput("confirmeda"),
                              plotlyOutput("deathsa"),
