@@ -19,7 +19,6 @@ shinyUI(navbarPage("COVID-19",
         mainPanel(
             tabsetPanel(
                 tabsetPanel(
-                    h4("Select `Overall counts` if you want total count for the countries you have selected in the defined time period you have entered"),
                     tabPanel("Overall Counts", 
                              plotlyOutput("confirmeda"),
                              plotlyOutput("deathsa"),

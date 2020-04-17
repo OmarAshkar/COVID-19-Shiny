@@ -1,25 +1,49 @@
 ---
 title: "COVID-19"
-date: "4/11/2020"
+date: "4/17/2020"
 output: ioslides_presentation
 ---
-## COVID-19 Spread
 
-COVID 19 data 4//9/2020 from JHU data.
+## App Idea
 
+> The main idea of the app is to provide interactive and quick indicators for COVID19 data
 
-## Interactive Chart
+## Data Source
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="COVID 19 data 4//9/2020 from JHU data"}
+> The data is obtained from [JHU](github.com%2FCSSEGISandData%2FCOVID-19&usg=AOvVaw1vKpECdLTiTa7d-LqfWRs0) <3
+
+## Main Features
+- Find the overall trends globally and for each country.
+- Can compare many countries together
+- Find the sum of active. confirmed, death and recovered cases.
+- Find the time trend of active confirmed, death and recovered cases.
+- Interative charts where you can zoom and pan
+- Interactive tables where you can sort the data as you want.
+
+## Limitations
+- The app is terrible slow and need some optimization.
+- Their is no feature to compare a country to the global total trend or averages.
+
+## Example of Interactive chart
+You can selet hover over the bars to see the counts, press on the country legend to hide other, zoom and pane!
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source("data.R")
 library(plotly)
-dat <- read.csv("04-09-2020.csv")
-gg <- ggplot(data = dat)
+dat <- dat %>% group_by(Country.Region) %>% filter(Country.Region %in% c("US", "Finland", "Algeria", "Egypt")) %>% 
+      summarize(Confirmed = sum(Confirmed, na.rm = T)) 
 
-ggplotly(
-       gg +
-           geom_bar(aes(x = Country_Region, y = Confirmed) , stat = "identity", position = position_identity()) + 
-           theme(axis.text.x = element_text(angle = 90, hjust = 1))
-    
-    )
+ g <- dat%>% ggplot()
+  
+
+ggplotly(g + geom_bar(aes(y = Confirmed, x = Country.Region, fill = Country.Region), stat = 'identity'))
+
 ```
+
+
+## Example of Interactive table
+In this table you can have more control to compare between countries in the time frame you have selected from the navigation of the app
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+DT::datatable(dat)
+```
+
 
